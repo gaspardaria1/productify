@@ -1,0 +1,56 @@
+{
+  "vision": {
+    "object": "stapler",
+    "quirks": [
+      "a chipped corner near the base",
+      "a faded coffee-ring stain on the top plate",
+      "a sticker-residue ghost where a price tag used to be"
+    ],
+    "material": "red painted steel and plastic",
+    "condition": "well-loved, three years of desk duty"
+  },
+  "brand": {
+    "name": "THE STAPL-INATOR 3000",
+    "slug_hint": "stapl-inator-3000",
+    "personality": "loud, urgent, over-the-top"
+  },
+  "tagline": "YOU WON'T BELIEVE IT BINDS!!",
+  "hero": {
+    "headline": "TIRED OF YOUR OLD, CHIPPED STAPLER??",
+    "subhead": "IT'S SCUFFED. IT'S STAINED. THERE HAS TO BE A BETTER WAY — AND THERE IS!",
+    "cta_label": "CALL NOW"
+  },
+  "features": [
+    { "title": "ONE-HAND POWER SLAM", "body": "Binds 50 sheets in the time it takes to say 'stapler'! That chipped corner? Battle damage from PURE POWER.", "icon_hint": "bolt" },
+    { "title": "NEVER JAMS*", "body": "*Almost never. That coffee-ring stain proves it survives ANY desk, ANY deadline.", "icon_hint": "clock" },
+    { "title": "AS SEEN ON DESKS EVERYWHERE", "body": "That mystery sticker residue? Fans peel their price tags off IMMEDIATELY out of sheer excitement.", "icon_hint": "star" }
+  ],
+  "pricing": [
+    { "tier": "Just One", "price": "$19.99", "period": "", "bullets": ["1 Stapl-inator", "Free shipping*"], "highlighted": false },
+    { "tier": "BUT WAIT", "price": "$29.99", "period": "in 3 easy payments", "bullets": ["2 Stapl-inators", "FREE staple caddy!!"], "highlighted": true },
+    { "tier": "Call Now", "price": "$39.99", "period": "in 3 easy payments", "bullets": ["3 Stapl-inators", "Bonus mystery gift"], "highlighted": false }
+  ],
+  "testimonials": [
+    { "quote": "I stapled my WHOLE LIFE together!", "author": "Gary from Ohio", "role": "Real Customer" },
+    { "quote": "I didn't know I needed this until I saw it at 2AM.", "author": "Denise T.", "role": "Insomniac Shopper" }
+  ],
+  "cta": {
+    "headline": "OPERATORS ARE STANDING BY!",
+    "button_label": "CALL NOW: 1-800-STAPLE1",
+    "footnote": "Offer not valid in stores. Batteries not included. Batteries not required."
+  },
+  "theme": {
+    "palette": {
+      "bg": "#FFF8E1",
+      "surface": "#FFFFFF",
+      "text": "#1A1A1A",
+      "muted": "#7A6A00",
+      "accent": "#FF3B30",
+      "accent_contrast": "#FFFFFF"
+    },
+    "font_pair": "condensed",
+    "radius": "pill",
+    "mood": "loud"
+  },
+  "logo_prompt": "Flat vector mark for 'THE STAPL-INATOR 3000', a loud urgent over-the-top brand. Primary accent #FF3B30 on bright yellow. No text, no letters, no words. Simple, iconic, centered, legible at 32px."
+}

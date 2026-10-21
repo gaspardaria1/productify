@@ -1,0 +1,56 @@
+{
+  "vision": {
+    "object": "stapler",
+    "quirks": [
+      "a chipped corner near the base",
+      "a faded coffee-ring stain on the top plate",
+      "a sticker-residue ghost where a price tag used to be"
+    ],
+    "material": "red painted steel and plastic",
+    "condition": "well-loved, three years of desk duty"
+  },
+  "brand": {
+    "name": "ReStaple",
+    "slug_hint": "restaple",
+    "personality": "earnest, community-driven, hopeful"
+  },
+  "tagline": "One stapler. One story. Help us bring it back.",
+  "hero": {
+    "headline": "We rescued this stapler — now we want to bring it to everyone.",
+    "subhead": "It's chipped, stained, and a little scuffed, and honestly? That's part of why we love it. Help us fund the next batch.",
+    "cta_label": "Back This Project"
+  },
+  "features": [
+    { "title": "Repaired, Not Replaced", "body": "The chipped corner stays — we refurbish and rehome desk tools instead of landfilling them.", "icon_hint": "leaf" },
+    { "title": "Made With Backers", "body": "Every design tweak, down to the coffee-ring-proof top plate, came from our community's feedback.", "icon_hint": "heart" },
+    { "title": "Small-Batch Build", "body": "Limited first run, assembled by a two-person workshop, sticker residue and all.", "icon_hint": "globe" }
+  ],
+  "pricing": [
+    { "tier": "Early Bird", "price": "$15", "period": "", "bullets": ["1 restored stapler", "Thank-you card"], "highlighted": false },
+    { "tier": "Backer", "price": "$35", "period": "", "bullets": ["2 staplers", "Behind-the-scenes updates"], "highlighted": true },
+    { "tier": "Champion", "price": "$75", "period": "", "bullets": ["4 staplers", "Your name on our site"], "highlighted": false }
+  ],
+  "testimonials": [
+    { "quote": "Backed on day one, no regrets.", "author": "Sam O.", "role": "Backer #142" },
+    { "quote": "Love supporting small workshops like this.", "author": "Ade K.", "role": "Backer #89" }
+  ],
+  "cta": {
+    "headline": "Help us hit our goal.",
+    "button_label": "Back This Project",
+    "footnote": "Funding ends in 12 days. All-or-nothing."
+  },
+  "theme": {
+    "palette": {
+      "bg": "#FFFFFF",
+      "surface": "#F3FBF6",
+      "text": "#0A2E1A",
+      "muted": "#4B6B57",
+      "accent": "#2BDE73",
+      "accent_contrast": "#0A2E1A"
+    },
+    "font_pair": "humanist",
+    "radius": "soft",
+    "mood": "earnest"
+  },
+  "logo_prompt": "Flat vector mark for 'ReStaple', an earnest community-driven hopeful brand. Primary accent #2BDE73 on white. No text, no letters, no words. Simple, iconic, centered, legible at 32px."
+}

@@ -1,0 +1,56 @@
+{
+  "vision": {
+    "object": "stapler",
+    "quirks": [
+      "a chipped corner near the base",
+      "a faded coffee-ring stain on the top plate",
+      "a sticker-residue ghost where a price tag used to be"
+    ],
+    "material": "red painted steel and plastic",
+    "condition": "well-loved, three years of desk duty"
+  },
+  "brand": {
+    "name": "Maison Agrafe",
+    "slug_hint": "maison-agrafe",
+    "personality": "opulent, restrained, exclusive"
+  },
+  "tagline": "L'art de fixer.",
+  "hero": {
+    "headline": "A stapler, elevated beyond function.",
+    "subhead": "Hand-finished. Quietly powerful. For desks that deserve better.",
+    "cta_label": "Inquire"
+  },
+  "features": [
+    { "title": "Sculpted Patina", "body": "The chip near the base is left unretouched — a mark of a piece that has lived, not merely been owned.", "icon_hint": "star" },
+    { "title": "Weighted Precision", "body": "Every press feels considered, never abrupt.", "icon_hint": "cube" },
+    { "title": "A Quiet Provenance", "body": "The faint ring left by countless cups of coffee is its own kind of signature.", "icon_hint": "sparkle" }
+  ],
+  "pricing": [
+    { "tier": "Édition", "price": "$180", "period": "", "bullets": ["Individually numbered", "Velvet case"], "highlighted": false },
+    { "tier": "Prestige", "price": "$420", "period": "", "bullets": ["Personal engraving", "Lifetime service"], "highlighted": true },
+    { "tier": "Collection", "price": "Price on request", "period": "", "bullets": ["Bespoke finish", "Concierge delivery"], "highlighted": false }
+  ],
+  "testimonials": [
+    { "quote": "It sits on my desk like a small sculpture.", "author": "Isabelle Moreau", "role": "Design Director" },
+    { "quote": "Understated. Exactly as I had hoped.", "author": "Julian Ashworth", "role": "Collector" }
+  ],
+  "cta": {
+    "headline": "Reserve yours.",
+    "button_label": "Inquire",
+    "footnote": "By appointment, while the current atelier run lasts."
+  },
+  "theme": {
+    "palette": {
+      "bg": "#0E0E0E",
+      "surface": "#1A1A1A",
+      "text": "#F5F0E8",
+      "muted": "#B8AFA0",
+      "accent": "#B08D57",
+      "accent_contrast": "#0E0E0E"
+    },
+    "font_pair": "editorial",
+    "radius": "sharp",
+    "mood": "opulent"
+  },
+  "logo_prompt": "Flat vector mark for 'Maison Agrafe', an opulent restrained exclusive brand. Primary accent #B08D57 on near-black. No text, no letters, no words. Simple, iconic, centered, legible at 32px."
+}

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ pack.brand.name }} — {{ pack.tagline }}</title>
+<meta name="description" content="{{ pack.tagline }}">
+<meta property="og:title" content="{{ pack.brand.name }}">
+<meta property="og:description" content="{{ pack.tagline }}">
+<link rel="icon" href="{{ favicon_data_uri }}">
+<style>
+  :root {
+  {# |safe: values come only from theme.py's own dicts + regex-validated hex,
+     never raw model text — autoescape would otherwise HTML-entity-encode the
+     quotes in font stacks (e.g. 'Century Gothic'), breaking the CSS. #}
+  {% for k, v in css_vars.items() %}  {{ k }}: {{ v|safe }};
+  {% endfor %}
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0; background: var(--pf-bg); color: var(--pf-text);
+    font-family: var(--pf-font-body); font-weight: var(--pf-body-weight);
+    line-height: 1.6;
+  }
+  h1, h2, h3 {
+    font-family: var(--pf-font-heading); font-weight: var(--pf-heading-weight);
+    letter-spacing: var(--pf-letter-spacing); text-transform: var(--pf-text-transform);
+    line-height: 1.15; margin: 0 0 16px;
+  }
+  p { margin: 0 0 12px; }
+  img { max-width: 100%; display: block; }
+  .pf-wrap { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+  .pf-btn {
+    display: inline-block; padding: 14px 32px; border: none; cursor: pointer;
+    border-radius: var(--pf-radius-button); background: var(--pf-accent);
+    color: var(--pf-button-label); font-family: var(--pf-font-body); font-weight: 700;
+    text-decoration: none; font-size: 1rem; transition: background 0.15s ease;
+  }
+  .pf-btn:hover { background: var(--pf-accent-hover); }
+
+  /* Top bar */
+  .pf-topbar {
+    position: sticky; top: 0; z-index: 10; background: var(--pf-surface);
+    border-bottom: var(--pf-mood-border); padding: 14px 0;
+  }
+  .pf-topbar .pf-wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .pf-topbar-left { display: flex; align-items: center; gap: 12px; min-width: 0; }
+  .pf-logo { width: 36px; height: 36px; border-radius: var(--pf-radius-image); overflow: hidden; flex-shrink: 0; color: var(--pf-accent); }
+  .pf-logo img { width: 100%; height: 100%; object-fit: cover; }
+  .pf-logo-monogram svg { width: 100%; height: 100%; }
+  .pf-brand-name { font-family: var(--pf-font-heading); font-weight: var(--pf-heading-weight); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .pf-topbar .pf-btn { padding: 10px 20px; font-size: 0.9rem; flex-shrink: 0; }
+
+  /* Hero */
+  .pf-hero { padding: var(--pf-section-padding); text-align: var(--pf-hero-align); }
+  .pf-hero-grid { display: grid; grid-template-columns: 1fr; gap: 40px; align-items: center; }
+  .pf-hero h1 {
+    font-size: calc(clamp(2rem, 4.5vw, 3.4rem) * var(--pf-heading-scale));
+    letter-spacing: var(--pf-heading-tracking);
+  }
+  .pf-hero .pf-subhead { font-size: 1.15rem; color: var(--pf-muted); max-width: 640px; }
+  .pf-hero[data-align="center"] .pf-subhead { margin-left: auto; margin-right: auto; }
+  .pf-hero-photo img {
+    border-radius: var(--pf-radius-image); box-shadow: var(--pf-shadow);
+    border: var(--pf-mood-border); width: 100%;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .pf-hero-photo img { animation: pf-hero-in 0.6s ease both; }
+  }
+  @keyframes pf-hero-in { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+
+  /* Sections */
+  section { padding: var(--pf-section-padding); }
+  section > .pf-wrap > h2 {
+    font-size: calc(clamp(1.6rem, 3vw, 2.2rem) * var(--pf-heading-scale));
+    text-align: center; margin-bottom: 36px;
+  }
+
+  /* Features */
+  .pf-feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 28px; }
+  .pf-card {
+    background: var(--pf-surface); border: var(--pf-mood-border);
+    border-radius: var(--pf-radius-card); box-shadow: var(--pf-shadow); padding: 28px;
+  }
+  .pf-feature-icon { width: 36px; height: 36px; color: var(--pf-accent); margin-bottom: 14px; }
+  .pf-feature-icon svg { width: 100%; height: 100%; }
+  .pf-feature-body { color: var(--pf-text-on-surface); opacity: 0.85; }
+
+  /* Pricing */
+  .pf-pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; }
+  .pf-price-card { text-align: center; position: relative; }
+  .pf-price-card.pf-highlighted { border-color: var(--pf-accent); border-width: 2px; transform: scale(1.03); }
+  .pf-ribbon {
+    position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+    background: var(--pf-accent); color: var(--pf-button-label); font-size: 0.75rem;
+    font-weight: 700; padding: 4px 14px; border-radius: 999px; white-space: nowrap;
+  }
+  .pf-price-value { font-size: 2rem; font-weight: 800; color: var(--pf-accent); margin: 8px 0 20px; }
+  .pf-price-value span { font-size: 0.95rem; font-weight: 400; color: var(--pf-muted); }
+  .pf-price-card ul { list-style: none; margin: 0; padding: 0; text-align: left; }
+  .pf-price-card li { padding: 6px 0; }
+  .pf-price-card li::before { content: "✓ "; color: var(--pf-accent); font-weight: 700; }
+
+  /* Testimonials */
+  .pf-testimonial-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+  .pf-testimonial-quote { font-style: italic; font-size: 1.05rem; }
+  .pf-testimonial-person { display: flex; align-items: center; gap: 12px; margin-top: 16px; }
+  .pf-avatar {
+    width: 44px; height: 44px; border-radius: 50%; background: var(--pf-accent);
+    color: var(--pf-button-label); display: flex; align-items: center; justify-content: center;
+    font-weight: 700; flex-shrink: 0;
+  }
+  .pf-testimonial-role { color: var(--pf-muted); font-size: 0.88rem; }
+
+  /* CTA band */
+  .pf-cta-band { background: var(--pf-accent); color: var(--pf-button-label); text-align: center; }
+  .pf-cta-band .pf-wrap { max-width: var(--pf-cta-container); }
+  .pf-cta-band h2 { font-size: calc(clamp(1.6rem, 3vw, 2.4rem) * var(--pf-heading-scale)); }
+  .pf-cta-band .pf-btn { background: var(--pf-bg); color: var(--pf-accent); }
+  .pf-cta-band .pf-btn:hover { opacity: 0.85; background: var(--pf-bg); }
+  .pf-cta-footnote { margin-top: 16px; opacity: 0.85; font-size: 0.9rem; }
+
+  footer {
+    text-align: center; padding: 28px 24px; opacity: 0.6; font-size: 0.85rem;
+    border-top: var(--pf-mood-border);
+  }
+
+  @media (max-width: 1023px) {
+    .pf-hero-grid { grid-template-columns: 1fr; }
+  }
+  @media (min-width: 1024px) {
+    .pf-hero-grid[data-has-photo="1"] { grid-template-columns: 1.1fr 0.9fr; text-align: left; }
+    .pf-hero-grid[data-has-photo="1"] .pf-subhead { margin-left: 0; margin-right: 0; }
+  }
+  @media (max-width: 640px) {
+    .pf-topbar .pf-brand-name { max-width: 40vw; }
+    section { padding: 40px 0; }
+    .pf-wrap { padding: 0 18px; }
+  }
+
+  @media print {
+    .pf-topbar { position: static; }
+    .pf-btn { border: 1px solid currentColor; }
+    section, .pf-hero { padding: 24px 0; }
+  }
+</style>
+</head>
+<body>
+
+<header class="pf-topbar">
+  <div class="pf-wrap">
+    <div class="pf-topbar-left">
+      <span class="pf-logo">{{ logo_markup|safe }}</span>
+      <span class="pf-brand-name">{{ pack.brand.name }}</span>
+    </div>
+    <a class="pf-btn" href="#pf-cta">{{ pack.hero.cta_label }}</a>
+  </div>
+</header>
+
+<section class="pf-hero" data-align="{{ css_vars['--pf-hero-align'] }}">
+  <div class="pf-wrap">
+    <div class="pf-hero-grid" data-has-photo="{{ '1' if photo_data_uri else '0' }}">
+      <div>
+        <h1>{{ pack.hero.headline }}</h1>
+        <p class="pf-subhead">{{ pack.hero.subhead }}</p>
+        <a class="pf-btn" href="#pf-cta">{{ pack.hero.cta_label }}</a>
+      </div>
+      {% if photo_data_uri %}
+      <div class="pf-hero-photo">
+        <img src="{{ photo_data_uri }}" alt="{{ pack.brand.name }} product photo">
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<section class="pf-features">
+  <div class="pf-wrap">
+    <h2>Why {{ pack.brand.name }}</h2>
+    <div class="pf-feature-grid">
+      {% for f in pack.features %}
+      <div class="pf-card">
+        <div class="pf-feature-icon">{{ icon_svg(f.icon_hint)|safe }}</div>
+        <h3>{{ f.title }}</h3>
+        <p class="pf-feature-body">{{ f.body }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="pf-pricing">
+  <div class="pf-wrap">
+    <h2>Pricing</h2>
+    <div class="pf-pricing-grid">
+      {% for tier in pack.pricing %}
+      <div class="pf-card pf-price-card {% if tier.highlighted %}pf-highlighted{% endif %}">
+        {% if tier.highlighted %}<span class="pf-ribbon">Most popular</span>{% endif %}
+        <h3>{{ tier.tier }}</h3>
+        <div class="pf-price-value">{{ tier.price }}<span>{{ tier.period }}</span></div>
+        <ul>
+          {% for bullet in tier.bullets %}
+          <li>{{ bullet }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="pf-testimonials">
+  <div class="pf-wrap">
+    <h2>What people are saying</h2>
+    <div class="pf-testimonial-grid">
+      {% for t in pack.testimonials %}
+      {% set parts = t.author.split(' ') %}
+      <div class="pf-card">
+        <p class="pf-testimonial-quote">&ldquo;{{ t.quote }}&rdquo;</p>
+        <div class="pf-testimonial-person">
+          <div class="pf-avatar">{{ parts[0][0] }}{{ parts[1][0] if parts|length > 1 else '' }}</div>
+          <div>
+            <div class="pf-testimonial-author">{{ t.author }}</div>
+            <div class="pf-testimonial-role">{{ t.role }}</div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="pf-cta-band" id="pf-cta">
+  <div class="pf-wrap">
+    <h2>{{ pack.cta.headline }}</h2>
+    <a class="pf-btn" href="#pf-cta">{{ pack.cta.button_label }}</a>
+    <p class="pf-cta-footnote">{{ pack.cta.footnote }}</p>
+  </div>
+</section>
+
+<footer>{{ pack.brand.name }} — generated today by Productify. Not a real company (probably).</footer>
+
+</body>
+</html>

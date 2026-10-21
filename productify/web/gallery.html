@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Productify — Gallery</title>
+<link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+<div class="page">
+
+  <header class="topbar">
+    <a href="index.html" class="brand-mark">🏭 Productify</a>
+    <a href="index.html" class="counter-link">← Found something new</a>
+  </header>
+
+  <main class="main">
+    <div class="hero-counter" id="hero-counter" aria-live="polite">
+      <div class="hero-counter-number" id="hero-counter-number">—</div>
+      <div class="hero-counter-label" id="hero-counter-label">companies founded today</div>
+    </div>
+
+    <div class="chips" id="tone-chips" role="group" aria-label="Filter by tone">
+      <button class="chip is-active" data-tone="all" type="button" aria-pressed="true">
+        All <span class="chip-count" id="chip-count-all">0</span>
+      </button>
+      <button class="chip" data-tone="vc" type="button" aria-pressed="false">
+        🚀 Silicon Valley Startup <span class="chip-count" id="chip-count-vc">0</span>
+      </button>
+      <button class="chip" data-tone="luxury" type="button" aria-pressed="false">
+        💎 Luxury Brand <span class="chip-count" id="chip-count-luxury">0</span>
+      </button>
+      <button class="chip" data-tone="infomercial" type="button" aria-pressed="false">
+        📺 Late-Night Infomercial <span class="chip-count" id="chip-count-infomercial">0</span>
+      </button>
+      <button class="chip" data-tone="kickstarter" type="button" aria-pressed="false">
+        🎯 Kickstarter Campaign <span class="chip-count" id="chip-count-kickstarter">0</span>
+      </button>
+    </div>
+
+    <div id="gallery-status" class="gallery-status" hidden role="alert">
+      <span id="gallery-status-message"></span>
+      <div>
+        <button type="button" id="gallery-retry-btn" class="btn btn-ghost btn-small">Retry now</button>
+      </div>
+    </div>
+
+    <div id="gallery-grid" class="gallery-grid" aria-live="polite"></div>
+  </main>
+</div>
+
+<script src="static/tones.js"></script>
+<script src="static/gallery.js"></script>
+</body>
+</html>

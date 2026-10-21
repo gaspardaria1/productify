@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Productify — found a startup</title>
+<script>
+  // Apply presenter mode (?presenter=1) before first paint so there is no
+  // flash of the normal layout. See style.css .presenter-hide / html.presenter-mode.
+  (function () {
+    try {
+      var params = new URLSearchParams(location.search);
+      if (params.get("presenter") === "1") {
+        document.documentElement.classList.add("presenter-mode");
+      }
+    } catch (e) {
+      /* URLSearchParams missing on some very old browser: presenter mode just won't engage */
+    }
+  })();
+</script>
+<link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+<div class="page">
+
+  <header class="topbar presenter-hide" id="topbar">
+    <a href="index.html" class="brand-mark">🏭 Productify</a>
+    <a href="gallery.html" class="counter-link" id="counter-link">
+      <span id="counter-text">View the gallery</span><span aria-hidden="true"> →</span>
+    </a>
+  </header>
+
+  <main class="main">
+    <h1 class="page-title presenter-hide">Found a startup from anything</h1>
+    <p class="page-sub presenter-hide">Photograph an object. Pick a tone. Get a pitch page.</p>
+
+    <section class="card photo-section" aria-label="Photo">
+      <div class="preview-frame" id="preview-frame">
+        <img id="preview-img" alt="Preview of your photo" hidden>
+        <label class="capture-label" id="capture-label" for="photo-input">
+          <span class="capture-icon" aria-hidden="true">📸</span>
+          <span>Take a photo</span>
+        </label>
+      </div>
+      <input type="file" id="photo-input" accept="image/*" capture="environment" hidden>
+      <div class="photo-controls" id="photo-controls" hidden>
+        <button type="button" id="choose-another-btn" class="btn btn-ghost">Choose another</button>
+        <span class="size-note presenter-hide" id="size-note"></span>
+      </div>
+    </section>
+
+    <section class="card tone-section" aria-label="Choose a tone">
+      <h2 class="section-title presenter-hide">Choose a tone</h2>
+      <div class="tone-grid" role="radiogroup" aria-label="Pitch tone" id="tone-grid">
+
+        <label class="tone-card" data-tone="vc">
+          <input class="tone-radio" type="radio" name="tone" value="vc" checked aria-label="Silicon Valley Startup">
+          <span class="tone-card-body">
+            <span class="tone-emoji" aria-hidden="true">🚀</span>
+            <span class="tone-name">Silicon Valley Startup</span>
+            <span class="tone-desc">Category creation, metrics, disruption talk</span>
+          </span>
+        </label>
+
+        <label class="tone-card" data-tone="luxury">
+          <input class="tone-radio" type="radio" name="tone" value="luxury" aria-label="Luxury Brand">
+          <span class="tone-card-body">
+            <span class="tone-emoji" aria-hidden="true">💎</span>
+            <span class="tone-name">Luxury Brand</span>
+            <span class="tone-desc">Restraint, invented heritage, price withheld</span>
+          </span>
+        </label>
+
+        <label class="tone-card" data-tone="infomercial">
+          <input class="tone-radio" type="radio" name="tone" value="infomercial" aria-label="Late-Night Infomercial">
+          <span class="tone-card-body">
+            <span class="tone-emoji" aria-hidden="true">📺</span>
+            <span class="tone-name">Late-Night Infomercial</span>
+            <span class="tone-desc">Urgent, shouty, three-easy-payments right now</span>
+          </span>
+        </label>
+
+        <label class="tone-card" data-tone="kickstarter">
+          <input class="tone-radio" type="radio" name="tone" value="kickstarter" aria-label="Kickstarter Campaign">
+          <span class="tone-card-body">
+            <span class="tone-emoji" aria-hidden="true">🎯</span>
+            <span class="tone-name">Kickstarter Campaign</span>
+            <span class="tone-desc">Community-driven, stretch goals, early-bird pricing</span>
+          </span>
+        </label>
+
+      </div>
+    </section>
+
+    <button type="button" id="submit-btn" class="btn btn-primary btn-block btn-big" disabled>✨ Found my startup</button>
+
+    <section class="card progress-card" id="progress-card" hidden aria-live="polite">
+      <ol class="progress-steps" id="progress-steps">
+        <li data-step="0" class="is-pending"><span class="step-marker" aria-hidden="true"></span><span>Looking at your object</span></li>
+        <li data-step="1" class="is-pending"><span class="step-marker" aria-hidden="true"></span><span>Inventing the company</span></li>
+        <li data-step="2" class="is-pending"><span class="step-marker" aria-hidden="true"></span><span>Designing the brand</span></li>
+        <li data-step="3" class="is-pending"><span class="step-marker" aria-hidden="true"></span><span>Publishing the page</span></li>
+      </ol>
+    </section>
+
+    <section class="card result-card" id="result-card" hidden aria-live="polite">
+      <h2 id="result-brand"></h2>
+      <p id="result-tagline" class="muted" hidden></p>
+      <p id="logo-status-note" class="muted small" hidden></p>
+      <div class="actions">
+        <a id="open-pitch-link" class="btn btn-primary" target="_blank" rel="noopener">Open the pitch</a>
+        <button type="button" id="try-another-btn" class="btn btn-ghost">Try another tone</button>
+      </div>
+    </section>
+
+    <section class="card error-card" id="error-card" hidden role="alert">
+      <p id="error-message"></p>
+      <button type="button" id="retry-btn" class="btn btn-ghost" hidden>Retry</button>
+    </section>
+
+    <p class="privacy-note presenter-hide" id="privacy-note">
+      Your photo and tone choice are kept only in this browser tab (sessionStorage), so an
+      accidental reload mid-demo doesn't lose the object.
+    </p>
+  </main>
+</div>
+
+<script src="static/tones.js"></script>
+<script src="static/app.js"></script>
+</body>
+</html>

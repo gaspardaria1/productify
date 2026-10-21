@@ -1,0 +1,140 @@
+{
+  "name": "content_pack",
+  "strict": true,
+  "schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["vision", "brand", "tagline", "hero", "features", "pricing", "testimonials", "cta", "theme", "logo_prompt"],
+    "properties": {
+      "vision": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["object", "quirks", "material", "condition"],
+        "properties": {
+          "object": { "type": "string", "description": "What the object is, in two words or fewer." },
+          "quirks": {
+            "type": "array",
+            "description": "3 to 5 specific observed details or defects. Oddly specific beats safely general. These MUST be reused in the copy.",
+            "items": { "type": "string" }
+          },
+          "material": { "type": "string" },
+          "condition": { "type": "string", "description": "e.g. pristine, well-loved, barely surviving" }
+        }
+      },
+      "brand": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "slug_hint", "personality"],
+        "properties": {
+          "name": { "type": "string", "description": "1-2 words, pronounceable, inventable. Avoid the -ify/-ly/Smart- reflex unless the tone earns it." },
+          "slug_hint": { "type": "string", "description": "lowercase, hyphenated, url-safe version of the name" },
+          "personality": { "type": "string", "description": "One sentence describing the brand voice, used to steer the logo prompt." }
+        }
+      },
+      "tagline": { "type": "string", "description": "Under 80 characters. Must reference at least one quirk." },
+      "hero": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["headline", "subhead", "cta_label"],
+        "properties": {
+          "headline": { "type": "string", "description": "Under 60 characters." },
+          "subhead": { "type": "string", "description": "One or two sentences." },
+          "cta_label": { "type": "string", "description": "Under 24 characters." }
+        }
+      },
+      "features": {
+        "type": "array",
+        "description": "EXACTLY 3 items. Counts cannot be enforced by this schema in strict mode; they are enforced in code.",
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["title", "body", "icon_hint"],
+          "properties": {
+            "title": { "type": "string", "description": "Under 40 characters." },
+            "body": { "type": "string", "description": "One or two sentences." },
+            "icon_hint": {
+              "type": "string",
+              "enum": ["bolt", "shield", "sparkle", "chart", "leaf", "clock", "globe", "heart", "lock", "star", "cube", "wave"]
+            }
+          }
+        }
+      },
+      "pricing": {
+        "type": "array",
+        "description": "EXACTLY 3 tiers, cheapest first. Exactly one has highlighted=true; enforced in code.",
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["tier", "price", "period", "bullets", "highlighted"],
+          "properties": {
+            "tier": { "type": "string", "description": "Under 20 characters." },
+            "price": { "type": "string", "description": "Formatted for display, tone-appropriate: '$19.99', 'Free', 'Price on request', '€2,400'." },
+            "period": { "type": "string", "description": "e.g. 'per month', 'one time', 'per seat / month', or an empty string." },
+            "bullets": { "type": "array", "description": "2 to 4 short lines.", "items": { "type": "string" } },
+            "highlighted": { "type": "boolean" }
+          }
+        }
+      },
+      "testimonials": {
+        "type": "array",
+        "description": "EXACTLY 2 items. Invented people. Enforced in code.",
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["quote", "author", "role"],
+          "properties": {
+            "quote": { "type": "string", "description": "Under 200 characters. Should feel like a real person in that tone's world." },
+            "author": { "type": "string" },
+            "role": { "type": "string", "description": "Job title and invented company." }
+          }
+        }
+      },
+      "cta": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["headline", "button_label", "footnote"],
+        "properties": {
+          "headline": { "type": "string" },
+          "button_label": { "type": "string" },
+          "footnote": { "type": "string", "description": "Small print. A good place to be funny." }
+        }
+      },
+      "theme": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["palette", "font_pair", "radius", "mood"],
+        "properties": {
+          "palette": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["bg", "surface", "text", "muted", "accent", "accent_contrast"],
+            "description": "All six values are 6-digit hex with a leading #. Validated in code; a single invalid value replaces the whole palette with the default.",
+            "properties": {
+              "bg": { "type": "string", "description": "Page background, e.g. #0b0d12" },
+              "surface": { "type": "string", "description": "Card background, distinct from bg" },
+              "text": { "type": "string", "description": "Body text, must contrast strongly with bg" },
+              "muted": { "type": "string", "description": "Secondary text" },
+              "accent": { "type": "string", "description": "Buttons and highlights" },
+              "accent_contrast": { "type": "string", "description": "Text placed ON the accent colour" }
+            }
+          },
+          "font_pair": {
+            "type": "string",
+            "description": "Choose deliberately to match the tone. These are system font stacks; no webfonts are loaded.",
+            "enum": ["geometric", "editorial", "technical", "condensed", "humanist", "rounded"]
+          },
+          "radius": { "type": "string", "enum": ["sharp", "soft", "pill"] },
+          "mood": {
+            "type": "string",
+            "description": "Drives layout structure, not just colour: spacing rhythm, heading scale, shadow strength, hero alignment.",
+            "enum": ["minimal", "opulent", "loud", "earnest", "corporate", "playful"]
+          }
+        }
+      },
+      "logo_prompt": {
+        "type": "string",
+        "description": "A prompt for an image model describing an abstract logo mark. No text, no letters, no words. Flat vector, centered, plain white background, readable at 32px."
+      }
+    }
+  }
+}

@@ -1,0 +1,674 @@
+/* Productify — shared styles for index.html and gallery.html.
+   Single dark theme tuned for a hackathon demo: high contrast, big tap
+   targets, readable from a few metres away when projected. */
+
+/* ============ Reset ============ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+img {
+  max-width: 100%;
+  display: block;
+}
+/* The JS toggles visibility with the `hidden` attribute throughout. Any later
+   `display` rule would silently beat it, so pin it here once. */
+[hidden] {
+  display: none !important;
+}
+button {
+  font: inherit;
+}
+a {
+  color: inherit;
+}
+ol,
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+/* ============ Tokens ============ */
+:root {
+  --bg: #0b0f1a;
+  --surface: #141b2d;
+  --surface-2: #1c2540;
+  --border: #2b3556;
+  --text: #f3f5fb;
+  --muted: #9aa5c7;
+  --accent: #7c6cff;
+  --accent-strong: #9b8dff;
+  --accent-contrast: #ffffff;
+  --success: #2fbf71;
+  --danger: #ff6b6b;
+  --warn: #ffb648;
+  --highlight-bg: rgba(124, 108, 255, 0.18);
+  --highlight-bg-strong: rgba(124, 108, 255, 0.38);
+  --radius-lg: 18px;
+  --radius-md: 12px;
+  --radius-sm: 8px;
+  --shadow-card: 0 8px 24px rgba(0, 0, 0, 0.28);
+  --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif;
+}
+
+/* Presenter mode (?presenter=1) scales the whole rem-based layout ~1.4x. */
+html {
+  font-size: 100%;
+}
+html.presenter-mode {
+  font-size: 140%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+.chip:focus-visible {
+  outline: 3px solid var(--accent-strong);
+  outline-offset: 2px;
+}
+
+.page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 1rem 1.1rem 3rem;
+}
+
+/* ============ Topbar ============ */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.6rem 0 1.2rem;
+  flex-wrap: wrap;
+}
+.brand-mark {
+  font-weight: 800;
+  font-size: 1.05rem;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  color: var(--text);
+}
+.counter-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--accent-strong);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  min-height: 48px;
+  padding: 0.4rem 0.2rem;
+}
+.counter-link:hover,
+.counter-link:focus-visible {
+  text-decoration: underline;
+}
+
+/* ============ Headings ============ */
+.page-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  margin-bottom: 0.35rem;
+  letter-spacing: -0.01em;
+}
+.page-sub {
+  color: var(--muted);
+  margin-bottom: 1.4rem;
+  font-size: 1rem;
+}
+.section-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 0.8rem;
+  color: var(--text);
+}
+
+/* ============ Card shell ============ */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.1rem;
+  margin-bottom: 1.1rem;
+  box-shadow: var(--shadow-card);
+}
+
+/* ============ Photo capture ============ */
+.preview-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  margin-bottom: 0.9rem;
+}
+.preview-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.preview-frame:not(.has-photo) img {
+  display: none;
+}
+.capture-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  color: var(--accent-strong);
+  font-weight: 700;
+  font-size: 1.15rem;
+  border: 2px dashed var(--border);
+  border-radius: var(--radius-md);
+  text-align: center;
+  padding: 1rem;
+}
+.preview-frame.has-photo .capture-label {
+  display: none;
+}
+.capture-icon {
+  font-size: 2.6rem;
+}
+
+.photo-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+.size-note {
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+/* ============ Buttons ============ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0.55rem 1.1rem;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  font-weight: 700;
+  font-size: 0.98rem;
+  cursor: pointer;
+  text-decoration: none;
+  user-select: none;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .btn {
+    transition: filter 0.15s ease, background-color 0.15s ease;
+  }
+}
+.btn:active {
+  filter: brightness(0.92);
+}
+.btn-primary {
+  background: var(--accent);
+  color: var(--accent-contrast);
+}
+.btn-primary:hover {
+  background: var(--accent-strong);
+}
+.btn-ghost {
+  background: transparent;
+  color: var(--text);
+  border-color: var(--border);
+}
+.btn-ghost:hover {
+  border-color: var(--accent-strong);
+}
+.btn-block {
+  width: 100%;
+}
+.btn-big {
+  font-size: 1.15rem;
+  padding: 0.9rem 1.2rem;
+}
+.btn-small {
+  /* Visually compact but still a full 48px tap target, per the mobile
+     tap-target rule applied consistently across both pages. */
+  font-size: 0.85rem;
+  min-height: 48px;
+  padding: 0.4rem 0.8rem;
+}
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  filter: none;
+}
+
+/* ============ Tone cards (radio semantics via real <input type=radio>) ============ */
+.tone-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.75rem;
+}
+.tone-card {
+  position: relative;
+  display: block;
+  cursor: pointer;
+}
+.tone-radio {
+  position: absolute;
+  top: 0.7rem;
+  left: 0.7rem;
+  width: 22px;
+  height: 22px;
+  margin: 0;
+  accent-color: var(--accent);
+  z-index: 1;
+}
+.tone-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  min-height: 48px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface-2);
+  padding: 0.9rem 0.9rem 0.9rem 2.5rem;
+}
+.tone-emoji {
+  font-size: 1.8rem;
+  line-height: 1;
+}
+.tone-name {
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+.tone-desc {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.tone-radio:checked + .tone-card-body {
+  border-color: var(--accent);
+  background: var(--accent);
+  box-shadow: 0 0 0 3px var(--highlight-bg-strong);
+}
+.tone-radio:checked + .tone-card-body .tone-name,
+.tone-radio:checked + .tone-card-body .tone-desc {
+  color: #ffffff;
+}
+.tone-radio:focus-visible + .tone-card-body {
+  outline: 3px solid var(--accent-strong);
+  outline-offset: 2px;
+}
+
+/* Presenter mode: scale the tone cards up a bit further so they read from
+   the back of a room, per spec item 11. */
+html.presenter-mode .tone-emoji {
+  font-size: 2.3rem;
+}
+html.presenter-mode .tone-name {
+  font-size: 1.25rem;
+}
+
+/* ============ Progress steps ============ */
+.progress-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+.progress-steps li {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  color: var(--muted);
+  font-weight: 600;
+  font-size: 0.98rem;
+}
+.step-marker {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+}
+.progress-steps li.is-active {
+  color: var(--text);
+}
+.progress-steps li.is-active .step-marker {
+  border-color: var(--accent);
+  background: var(--accent);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .progress-steps li.is-active .step-marker {
+    animation: pulse-dot 1.1s ease-in-out infinite;
+  }
+}
+@keyframes pulse-dot {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 var(--highlight-bg-strong);
+  }
+  50% {
+    box-shadow: 0 0 0 6px var(--highlight-bg);
+  }
+}
+.progress-steps li.is-done {
+  color: var(--success);
+}
+.progress-steps li.is-done .step-marker {
+  border-color: var(--success);
+  background: var(--success);
+}
+.progress-steps li.is-done .step-marker::after {
+  content: "✓";
+  color: #fff;
+}
+
+/* ============ Result / error panels ============ */
+.result-card .actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: 0.9rem;
+}
+.muted {
+  color: var(--muted);
+}
+.small {
+  font-size: 0.85rem;
+}
+.error-card {
+  border-color: var(--danger);
+}
+.error-card p {
+  margin-bottom: 0.8rem;
+  color: var(--text);
+}
+
+.privacy-note {
+  color: var(--muted);
+  font-size: 0.8rem;
+  text-align: center;
+  margin-top: 1.4rem;
+}
+
+/* ============ Presenter mode ============ */
+html.presenter-mode .presenter-hide {
+  display: none !important;
+}
+
+/* ============ Gallery: hero counter ============ */
+.hero-counter {
+  text-align: center;
+  padding: 1.6rem 0 1rem;
+}
+.hero-counter-number {
+  font-size: clamp(3.2rem, 14vw, 6.5rem);
+  font-weight: 900;
+  line-height: 1;
+  color: var(--accent-strong);
+  letter-spacing: -0.02em;
+}
+.hero-counter-label {
+  font-size: 1.1rem;
+  color: var(--muted);
+  font-weight: 600;
+  margin-top: 0.2rem;
+}
+
+/* ============ Gallery: filter chips ============ */
+.chips {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.2rem;
+}
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 48px;
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-weight: 600;
+  font-size: 0.88rem;
+  cursor: pointer;
+}
+.chip.is-active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+.chip-count {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 999px;
+  padding: 0.05rem 0.5rem;
+  font-size: 0.8rem;
+}
+
+.gallery-status {
+  background: var(--surface);
+  border: 1px solid var(--danger);
+  color: var(--text);
+  padding: 0.8rem 1rem;
+  border-radius: var(--radius-md);
+  margin-bottom: 1rem;
+}
+.gallery-status .btn {
+  margin-top: 0.6rem;
+}
+
+/* ============ Gallery: grid + cards ============ */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+}
+.gallery-grid.is-empty {
+  grid-template-columns: 1fr;
+}
+
+.gallery-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .gallery-card {
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+  }
+}
+.gallery-card.is-new {
+  background-color: var(--highlight-bg);
+  border-color: var(--accent);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .gallery-card.is-new {
+    animation: card-pop 1.6s ease;
+  }
+}
+@keyframes card-pop {
+  0% {
+    background-color: var(--highlight-bg-strong);
+  }
+  100% {
+    background-color: var(--highlight-bg);
+  }
+}
+
+.thumb-frame {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background: var(--surface-2);
+}
+.thumb-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/* Stands in for a thumbnail that failed to load, so the card still reads as a
+   card instead of showing a broken-image glyph. */
+.thumb-frame-empty {
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, var(--surface-2), var(--surface-1));
+}
+.thumb-frame-empty::after {
+  content: "🏭";
+  font-size: 2rem;
+  opacity: 0.35;
+}
+
+.gallery-card-body {
+  padding: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  flex: 1;
+}
+.gallery-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+.gallery-brand {
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+.tone-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  white-space: nowrap;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  background: var(--surface-2);
+  color: var(--muted);
+  border: 1px solid var(--border);
+}
+.tone-badge-vc {
+  color: #b7aeff;
+  border-color: #7c6cff;
+}
+.tone-badge-luxury {
+  color: #e8cf7a;
+  border-color: #d4af37;
+}
+.tone-badge-infomercial {
+  color: #ff9d91;
+  border-color: #ff6b5b;
+}
+.tone-badge-kickstarter {
+  color: #7fe3ac;
+  border-color: #2fbf71;
+}
+
+.gallery-tagline {
+  color: var(--muted);
+  font-size: 0.9rem;
+  flex: 1;
+}
+.gallery-time {
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+.gallery-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.4rem;
+  flex-wrap: wrap;
+}
+
+/* ============ Gallery: skeleton loading state ============ */
+.skeleton-block,
+.skeleton-line {
+  background: var(--surface-2);
+  border-radius: 6px;
+}
+.skeleton-line {
+  height: 0.9rem;
+  margin: 0.3rem 0;
+}
+.skeleton .gallery-card-body {
+  padding: 0.9rem;
+}
+.w-70 {
+  width: 70%;
+}
+.w-40 {
+  width: 40%;
+}
+.w-90 {
+  width: 90%;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .skeleton .skeleton-block,
+  .skeleton .skeleton-line {
+    animation: skeleton-pulse 1.3s ease-in-out infinite;
+  }
+}
+@keyframes skeleton-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* ============ Gallery: empty state ============ */
+.empty-state {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--muted);
+  grid-column: 1 / -1;
+}
+.empty-emoji {
+  font-size: 2.6rem;
+  margin-bottom: 0.6rem;
+}
+
+/* ============ Responsive ============ */
+@media (min-width: 640px) {
+  .page {
+    padding: 1.5rem 1.5rem 3.5rem;
+  }
+}

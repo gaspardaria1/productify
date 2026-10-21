@@ -1,0 +1,95 @@
+{
+  "vision": {
+    "object": "stapler",
+    "quirks": [
+      "a deep scratch across the top plate",
+      "half-peeled asset tag reading 'PROP-0'",
+      "faded from black to charcoal on one side only",
+      "hinge squeaks visibly loose"
+    ],
+    "material": "stamped steel with plastic housing",
+    "condition": "well-loved, institutional"
+  },
+  "brand": {
+    "name": "Clipwell",
+    "slug_hint": "clipwell",
+    "personality": "Confident infrastructure company that believes it is inventing a category nobody asked for."
+  },
+  "tagline": "The last stapler you'll ever have to onboard.",
+  "hero": {
+    "headline": "Document adhesion, finally solved.",
+    "subhead": "Clipwell is the fastening layer for teams who ship on paper. One device, zero downtime, and a scratch on the top plate that we consider a changelog.",
+    "cta_label": "Request access"
+  },
+  "features": [
+    {
+      "title": "Provenance built in",
+      "body": "Every unit ships with a half-peeled asset tag. Not a defect — an immutable audit trail you can feel with your thumb.",
+      "icon_hint": "shield"
+    },
+    {
+      "title": "Asymmetric wear telemetry",
+      "body": "One side fades faster than the other. That gradient is data: it tells you which desk actually does the work.",
+      "icon_hint": "chart"
+    },
+    {
+      "title": "Audible feedback loop",
+      "body": "The hinge squeaks on every actuation. Competing solutions fail silently. Clipwell tells you it is alive.",
+      "icon_hint": "wave"
+    }
+  ],
+  "pricing": [
+    {
+      "tier": "Solo",
+      "price": "$29",
+      "period": "per seat / month",
+      "bullets": ["1 fastening endpoint", "Community support", "Standard squeak"],
+      "highlighted": false
+    },
+    {
+      "tier": "Team",
+      "price": "$89",
+      "period": "per seat / month",
+      "bullets": ["Unlimited endpoints", "Wear telemetry dashboard", "Priority hinge calibration", "SSO for the drawer"],
+      "highlighted": true
+    },
+    {
+      "tier": "Enterprise",
+      "price": "Let's talk",
+      "period": "",
+      "bullets": ["Dedicated fastening architect", "On-prem deployment", "99.99% adhesion SLA"],
+      "highlighted": false
+    }
+  ],
+  "testimonials": [
+    {
+      "quote": "We were fastening documents with three vendors and a prayer. Clipwell consolidated our stack down to one object that sits on a desk.",
+      "author": "Dana Reisch",
+      "role": "VP Operations, Northbound Logistics"
+    },
+    {
+      "quote": "The scratch on the top plate is how I know it's ours. You can't buy that kind of identity.",
+      "author": "Marcus Oyelaran",
+      "role": "Head of Workplace, Tessellate"
+    }
+  ],
+  "cta": {
+    "headline": "Join the teams who stopped thinking about staples.",
+    "button_label": "Request access",
+    "footnote": "Clipwell is currently in limited release. The hinge is a feature and we will not be taking questions."
+  },
+  "theme": {
+    "palette": {
+      "bg": "#0b0d12",
+      "surface": "#151922",
+      "text": "#f2f4f8",
+      "muted": "#8a93a6",
+      "accent": "#5b8cff",
+      "accent_contrast": "#0b0d12"
+    },
+    "font_pair": "geometric",
+    "radius": "soft",
+    "mood": "corporate"
+  },
+  "logo_prompt": "Flat vector logo mark, abstract geometric symbol suggesting two planes fastening together, single accent colour #5b8cff on plain white background, centered, generous margin, no text, no letters, no words, no gradient, crisp edges, legible at 32 pixels."
+}

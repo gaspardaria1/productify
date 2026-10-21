@@ -1,0 +1,22 @@
+# secrets — never commit
+.env
+
+# generated at runtime — ignore the contents, keep the directory so it exists on clone
+out/*
+!out/.gitkeep
+preview/
+
+# python
+__pycache__/
+*.pyc
+.venv/
+
+# node (we have no build step, but editors leave this around)
+node_modules/
+
+# macOS
+.DS_Store
+
+# Bundles are the transfer unit between the two laptops — see contracts/handoff.md.
+# out/ above is ignored, but fixtures/bundles/ is tracked ON PURPOSE.
+!fixtures/bundles/
